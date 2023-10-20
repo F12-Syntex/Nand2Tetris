@@ -5,11 +5,14 @@
 /**
  * Demultiplexor:
  * [a, b] = ((sel == 0), [in, 0], [0, in])
+  * if sel is 0, then the output is input and 0, else 0 and input
  */
 CHIP DMux {
     IN in, sel;
     OUT a, b;
 
     PARTS:
-    //// Replace this comment with your code.
+        Not(in=sel, out=notSel);
+        And(a=in, b=notSel, out=a);
+        And(a=sel, b=in, out=b);
 }
