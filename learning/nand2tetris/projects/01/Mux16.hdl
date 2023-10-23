@@ -11,69 +11,20 @@
     OUT out[16];
 
     PARTS:
-        Not(in=sel, out=notSel);
-
-        And(a=a[0], b=notSel, out=AandNotSel0);
-        And(a=b[0], b=sel, out=BandSel0);
-        Or(a=AandNotSel0, b=BandSel0, out=out[0]);
-
-        And(a=a[1], b=notSel, out=AandNotSel1);
-        And(a=b[1], b=sel, out=BandSel1);
-        Or(a=AandNotSel1, b=BandSel1, out=out[1]);
-
-        And(a=a[2], b=notSel, out=AandNotSel2);
-        And(a=b[2], b=sel, out=BandSel2);
-        Or(a=AandNotSel2, b=BandSel2, out=out[2]);
-
-        And(a=a[3], b=notSel, out=AandNotSel3);
-        And(a=b[3], b=sel, out=BandSel3);
-        Or(a=AandNotSel3, b=BandSel3, out=out[3]);
-
-        And(a=a[4], b=notSel, out=AandNotSel4);
-        And(a=b[4], b=sel, out=BandSel4);
-        Or(a=AandNotSel4, b=BandSel4, out=out[4]);
-
-        And(a=a[5], b=notSel, out=AandNotSel5);
-        And(a=b[5], b=sel, out=BandSel5);
-        Or(a=AandNotSel5, b=BandSel5, out=out[5]);
-
-        And(a=a[6], b=notSel, out=AandNotSel6);
-        And(a=b[6], b=sel, out=BandSel6);
-        Or(a=AandNotSel6, b=BandSel6, out=out[6]);
-
-        And(a=a[7], b=notSel, out=AandNotSel7);
-        And(a=b[7], b=sel, out=BandSel7);
-        Or(a=AandNotSel7, b=BandSel7, out=out[7]);
-
-        And(a=a[8], b=notSel, out=AandNotSel8);
-        And(a=b[8], b=sel, out=BandSel8);
-        Or(a=AandNotSel8, b=BandSel8, out=out[8]);
-
-        And(a=a[9], b=notSel, out=AandNotSel9);
-        And(a=b[9], b=sel, out=BandSel9);
-        Or(a=AandNotSel9, b=BandSel9, out=out[9]);
-
-        And(a=a[10], b=notSel, out=AandNotSel10);
-        And(a=b[10], b=sel, out=BandSel10);
-        Or(a=AandNotSel10, b=BandSel10, out=out[10]);
-
-        And(a=a[11], b=notSel, out=AandNotSel11);
-        And(a=b[11], b=sel, out=BandSel11);
-        Or(a=AandNotSel11, b=BandSel11, out=out[11]);
-
-        And(a=a[12], b=notSel, out=AandNotSel12);
-        And(a=b[12], b=sel, out=BandSel12);
-        Or(a=AandNotSel12, b=BandSel12, out=out[12]);
-
-        And(a=a[13], b=notSel, out=AandNotSel13);
-        And(a=b[13], b=sel, out=BandSel13);
-        Or(a=AandNotSel13, b=BandSel13, out=out[13]);
-
-        And(a=a[14], b=notSel, out=AandNotSel14);
-        And(a=b[14], b=sel, out=BandSel14);
-        Or(a=AandNotSel14, b=BandSel14, out=out[14]);
-
-        And(a=a[15], b=notSel, out=AandNotSel15);
-        And(a=b[15], b=sel, out=BandSel15);
-        Or(a=AandNotSel15, b=BandSel15, out=out[15]);
+        Mux(a=a[0], b=b[0], sel=sel, out=out[0]);
+        Mux(a=a[1], b=b[1], sel=sel, out=out[1]);
+        Mux(a=a[2], b=b[2], sel=sel, out=out[2]);
+        Mux(a=a[3], b=b[3], sel=sel, out=out[3]);
+        Mux(a=a[4], b=b[4], sel=sel, out=out[4]);
+        Mux(a=a[5], b=b[5], sel=sel, out=out[5]);
+        Mux(a=a[6], b=b[6], sel=sel, out=out[6]);
+        Mux(a=a[7], b=b[7], sel=sel, out=out[7]);
+        Mux(a=a[8], b=b[8], sel=sel, out=out[8]);
+        Mux(a=a[9], b=b[9], sel=sel, out=out[9]);
+        Mux(a=a[10], b=b[10], sel=sel, out=out[10]);
+        Mux(a=a[11], b=b[11], sel=sel, out=out[11]);
+        Mux(a=a[12], b=b[12], sel=sel, out=out[12]);
+        Mux(a=a[13], b=b[13], sel=sel, out=out[13]);
+        Mux(a=a[14], b=b[14], sel=sel, out=out[14]);
+        Mux(a=a[15], b=b[15], sel=sel, out=out[15]);
 }
