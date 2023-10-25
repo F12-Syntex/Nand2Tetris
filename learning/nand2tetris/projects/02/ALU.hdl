@@ -40,5 +40,32 @@ CHIP ALU {
         ng;      // (out < 0,  1, 0)
 
     PARTS:
-    //// Replace this comment with your code.
+        //handle decide which values to get rid of
+        Mux16(a=x, b[0..15]=false, sel=zx, out=xMux);
+        Mux16(a=y, b[0..15]=false, sel=zy, out=yMux);
+
+        //not the input if required
+        Not16(in=xMux, out=xMuxNot);
+        Not16(in=yMux, out=yMuxNot);
+        
+        Mux16(a=xMux, b=xMuxNot, sel=nx, out=readyX);
+        Mux16(a=yMux, b=yMuxNot, sel=ny, out=readyY);
+
+        //compute (out = x + y) or (out = x & y)
+        Add16(a=readyX, b=readyY, out=sum);
+        And16(a=readyX, b=readyY, out=andXY);
+
+        //decide which value to use
+        Mux16(a=andXY, b=sum, sel=f, out=computation);
+
+        //negate the output if needed
+        Not16(in=computation, out=notComputation);
+        Mux16(a=computation, b=notComputation, sel=no, out=out, out[15]=ng, out[0..7]=out8, out[8..15]=out16);
+
+        //check if the value (16 bits) is 0
+        Or8Way(in=out8, out=computedOr1);
+        Or8Way(in=out16, out=computedOr2);
+        Or(a=computedOr1, b=computedOr2, out=computedOr3);
+        Not(in=computedOr3, out=zr);
+
 }
