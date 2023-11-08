@@ -1,0 +1,14 @@
+CHIP DMux{
+    //{a, b} = {in, 0} if sel == 0 else {0, in} 
+    IN in, sel;
+    OUT a, b;
+
+    PARTS:   
+        Nand(a=sel, b=sel, out=notSel); //NOT SEL
+
+        Nand(a=notSel, b=in, out=NotAandNotSel); //NOT ( IN AND NOT SEL)
+        Nand(a=NotAandNotSel, b=NotAandNotSel, out=a); //IN AND NOT SEL
+
+        Nand(a=in, b=sel, out=NotInAndSel); //NOT ( IN AND SEL )
+        Nand(a=NotInAndSel, b=NotInAndSel, out=b); //IN AND SEL
+}

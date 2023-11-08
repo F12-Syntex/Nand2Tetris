@@ -7,3 +7,5 @@ CHIP Or{
         Nand(a=b, b=b, out=notB); //NOT B
         Nand(a=notA, b=notB, out=out); //NAND NOT A NOT B
 }
+
+
