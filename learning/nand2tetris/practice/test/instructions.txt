@@ -1,0 +1,56 @@
+--- COMP557 in-class test 1 ---
+
+Edit the three hdl files according to the instructions below:
+
+ict1/q1/Or.hdl
+ict1/q2/HalfAdder.hdl
+ict1/q3/Mux.hdl
+
+Do not edit or create other files (generated files are OK to leave in place).
+
+Use the Hardware Simulator in the ict1-11/tools directory and the .tst files in each question directory to test your chips.
+
+Once you have completed the three questions, compress the entire ict1-11 directory and submit it to Moodle.
+To compress on Windows: right-click the folder, select 'Send to', and then select 'Compressed (zipped) folder'.
+To compress on Mac: right-click the folder, select 'Compress "ict1-11"'.
+
+Please submit 35 minutes after you start.
+Students with ILPs should stick to the following times:
+adding 25% is about 44 minutes,
+adding 33% is about 47 minutes,
+adding 50% is about 50 minutes.
+In each case, I will allow a grace period.
+
+
+--- ict1-11/q1/Or.hdl [4 marks] ---
+
+Build an Or gate using only Nand gates.
+
+The built-in Nand has inputs 'a','b', output 'out', and the following truth table:
+
+|   a   |   b   |  out  |
+|   0   |   0   |   1   |
+|   0   |   1   |   1   |
+|   1   |   0   |   1   |
+|   1   |   1   |   0   |
+
+
+--- ict1-11/q2/HalfAdder.hdl [4 marks] ---
+
+Build a half adder using built-in And, Or, Not, Xor, Nand or Nor chips.
+It should sum 1-bit inputs 'a' and 'b' to produce 1-bit outputs 'sum' and 'carry'.
+
+
+--- ict1-11/q3/Mux.hdl [2 marks] ---
+
+Build a multiplexer using built-in And, Or, Not, Xor, Nand or Nor chips.
+It should have inputs 'a','b' and 'sel' and output 'out'.
+If 'sel' is set low, then 'out' should have the value of 'a'.
+If 'sel' is set high, then 'out' should have the value of 'b'.
+
+
+--- How it is marked ---
+
+Each chip will be run against its accompanying .tst file.
+If the submitted chip passes all tests in the .tst script, then it is awarded full marks.
+If not, it gets zero marks (make sure to test your chips!).
