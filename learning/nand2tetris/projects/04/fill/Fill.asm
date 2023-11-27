@@ -3,84 +3,82 @@
 // by Nisan and Schocken, MIT Press.
 // File name: projects/04/Fill.asm
 
-// Runs an infinite loop that listens to the keyboard input. 
-// When a key is pressed (any key), the program blackens the screen,
-// i.e. writes "black" in every pixel. When no key is pressed, the
-// program clears the screen, i.e. writes "white" in every pixel.
+// The purpose of this program is to toggle the entire screen between black and white pixels based on keyboard input.
+// If any key is pressed, the screen will turn black. When no keys are pressed, the screen will turn white.
 
-// Put your code here.
-
-// KEYBOARD > 0? FILL : CLEAR
+// Starts by entering an infinite loop that checks if a key is currently being pressed or not.
 (LOOP)
-    // Get keyboard value.
+    // Get keyboard value. The KBD memory location contains the most recently pressed key's ASCII code; 0 if no key is pressed.
     @KBD
     D=M
 
-    // Jump to on if it's more than 0.
+    // Check if a key is pressed (is KBD > 0?). If it is, jump to the 'ON' label to fill the screen with black.
     @ON
     D;JGT
 
-    // Jump to off otherwise.
+    // If no key is pressed, proceed to clear the screen with white pixels by jumping to the 'OFF' label.
     @OFF
     0;JMP
 
-// Turn the screen on and loop.
+// Label for turning the screen on (black).
 (ON)
-    // Set the draw value to -1 (1111111111111111).
+    // Set A-register to address R0 and load -1 into R0 to represent a black pixel (since the screen works in 16-bit mode,
+    // -1 corresponds to all 16 bits set which makes the screen black).
     @R0
     M=-1
 
-    // Draw.
+    // Jump to DRAW routine to update the screen pixels.
     @DRAW
     0;JMP
 
-// Turn the screen off and loop.
+// Label for turning the screen off (white).
 (OFF)
-    // Set the draw value to 0 (0000000000000000).
+    // Set A-register to address R0 and load 0 into R0 to represent a white pixel (all bits cleared).
     @R0
     M=0
 
-    // Draw.
+    // Jump to DRAW routine to update the screen pixels.
     @DRAW
     0;JMP
 
-// Set the screen to R0 and loop.
+// This subroutine sets the entire screen's pixel values based on the current content of R0.
 (DRAW)
-    // Set the counter (R1) to 8192 (this is how many blits we need to do).
-    // We will keep counting down with this as we draw.
+    // Set up a counter to iterate over each pixel. There are 8192 16-bit locations in the screen memory.
+    // Initializing counter in R1 with 8191 because counting starts from 0.
     @8191
     D=A
     @R1
     M=D
 
-    // Walk the screen and set the values to R0.
+    // Loop over each screen pixel and set it to the value in R0 (either -1 for black or 0 for white).
     (NEXT)
-        // Calculate the position.
+        // Load current value of R1 into D and store it in variable 'pos'.
         @R1
         D=M
         @pos
         M=D
+
+        // Calculate actual RAM address for the next pixel using the base address of the SCREEN and the counter at 'pos'.
         @SCREEN
         D=A
         @pos
         M=M+D
 
-        // Actually draw the value at the current position.
+        // Draw the value (-1 or 0) at the current position pointed to by 'pos'.
         @R0
         D=M
         @pos
         A=M
         M=D
 
-        // Decrement the counter (R1).
+        // Decrement the counter (R1) as we just wrote to one pixel.
         @R1
-        D=M-1
-        M=D
+        M=M-1
 
-        // Next if the counter is still >= 0.
+        // Continue the NEXT loop if there are still pixels to be updated (if R1 >= 0).
         @NEXT
         D;JGE
 
-    // Loop back around.
+    // Once all pixels have been updated, loop back to the beginning to check keyboard input again.
     @LOOP
     0;JMP
